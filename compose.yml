@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:alpine
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: admin
+      POSTGRES_DB: database
+    ports:
+      - "5433:5432"
+    volumes:
+      - /home/hriq/repos/Labrary_ERP/DB/data/  # Mounts the 'db_data' volume to persist data
+      - /home/hriq/repos/Labrary_ERP/DB/scripts/
+
+
+volumes:
+  db_data:
+    driver: local  # Uses the local driver for the volume
