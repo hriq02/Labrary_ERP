@@ -1,0 +1,109 @@
+.grid-container {
+  width: 96%;
+  height: 85%;
+  /* border: 10px; */
+  border: none;
+  border-radius: 10px;
+  margin: auto;
+
+}
+
+.grid-header {
+  width: 100%;
+  height: 9.5%;
+  color: black;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+  border-bottom: 1px solid rgb(103, 101, 109);
+}
+
+.grid-header-cell {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  border: none;
+  gap: 3%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  text-decoration: bold;
+
+  justify-content: center;
+  font-size: 18px;
+}
+
+.grid-header-sort {
+  cursor: pointer;
+}
+
+
+.grid-row{
+  width: 100%;
+  height: 7%;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(80, 79, 83);
+  
+}
+/* tem que deixar o mesmo, não sei o motivo, só sei que se não for assim não vai*/
+.grid-row-selected {
+  width: 100%;
+  height: 7%;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(80, 79, 83);
+  background-color: rgba(255, 255, 255, 0.089);
+}
+
+
+.grid-row-cell {
+  width: 10%;
+  height: 100%;
+  background-color: transparent;
+  margin: auto;
+  text-align: center;
+  border: none;
+  height: 100%;
+  color: white;
+  font-size: 16px;
+  margin-top: 1%;
+
+}
+
+.grid-row:hover{
+  background-color: rgba(146, 156, 204, 0.082);
+}
+
+
+
+.button-gen{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  width: 10%;
+  height: 50%;
+  border-radius: 10px;
+  border-color: rgb(213, 214, 218);
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2.5%;
+  font-size: 14px;
+  cursor: pointer;
+}

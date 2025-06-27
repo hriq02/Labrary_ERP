@@ -1,0 +1,28 @@
+.purchase-module-container{
+    width: 98%;
+    height: 98%;
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    margin: auto;
+    margin-top: 0.5%;
+}
+
+
+.purchase-module-header{
+    background-color: rgb(53, 56, 70);
+    width: 96%;
+    height: 12%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+}
+
+.purchase-module-rows-container{
+    width: 99%;
+    height: 80%;
+    border: none;
+    border-radius: 10px;
+    margin: auto;
+}
