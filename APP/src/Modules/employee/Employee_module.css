@@ -1,0 +1,9 @@
+
+.window_container{
+    width: 98%;
+    height: 98%;
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    margin: auto;
+    margin-top: 0.5%;
+}

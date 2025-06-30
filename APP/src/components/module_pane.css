@@ -1,4 +1,4 @@
-.purchase-module-container{
+.module-pane-container{
     width: 98%;
     height: 98%;
     border-radius: 10px;
@@ -7,22 +7,23 @@
     margin-top: 0.5%;
 }
 
-
-.purchase-module-header{
+.module-pane-header{
     background-color: rgb(53, 56, 70);
     width: 96%;
     height: 12%;
     display: flex;
+    border-radius: 10px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 2%;
 }
 
-.purchase-module-rows-container{
-    width: 99%;
-    height: 80%;
-    border: none;
-    border-radius: 10px;
-    margin: auto;
+.module-pane-header-buttons{
+    width: 100%;
+    height: 70%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
 }

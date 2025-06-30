@@ -2,6 +2,7 @@ import { useState } from "react";
 import BooksModule from "./Modules/Books/Books_Module";
 import PurchaseModule from "./Modules/Purchase/Purchase_module";
 import StockModule from "./Modules/Stock/Stock_module";
+import Employee_Module from "./Modules/employee/Employee_module";
 
 // Test.jsx
 function SideBar({ module_list, onModuleChange }) {
@@ -27,7 +28,7 @@ function Test() {
     new Module("Books", "fa fa-book", BooksModule),
     new Module("Purchase Orders", "fa fa-truck", PurchaseModule),
     new Module("Stock", "fa-solid fa-box",StockModule),
-    new Module("Employee", "fa fa-user"),
+    new Module("Employee", "fa fa-user", Employee_Module),
   ];
   const [current_module, setCurrentModule] = useState(modules_test[0]);
 

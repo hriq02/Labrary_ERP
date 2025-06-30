@@ -2,6 +2,7 @@ import { useState } from "react";
 import GridComponent from "../../components/GridComponent";
 import SearchComponent,{PagNav} from "../../components/SmallComponents";
 import "./Stock_module.css";
+import "../../components/module_pane.css"
 
 function StockModule() {
   
@@ -31,7 +32,7 @@ function StockModule() {
     console.log("onHeaderSort");
   };
 
-  const [gridPage, setGridPage] = useState(1); // usa state agora
+  const [gridPage, setGridPage] = useState(1);
   const max_page = 10;
 
   const onPageChange = (page) => {
@@ -45,20 +46,18 @@ function StockModule() {
   }
   
   return (
-    <div className="purchase-module-container">
-      <div className="purchase-module-header">
+    <div className="module-pane-container">
+      <div className="module-pane-header">
         <div></div>
         <SearchComponent placeholder="Search" _onSearch={onSearch}/>
       </div>
-      <div className="purchase-module-rows-container">
-        <GridComponent
-          GridHeader={GridHeader}
-          CellsData={CellsData}
-          _onRowSelected={onRowSelected}
-          onHeaderSort={onHeaderSort}
-          max_rows={grid_max_rows}
-        />
-      </div>
+      <GridComponent
+        GridHeader={GridHeader}
+        CellsData={CellsData}
+        _onRowSelected={onRowSelected}
+        onHeaderSort={onHeaderSort}
+        max_rows={grid_max_rows}
+      />
       <PagNav
         current_page={gridPage}
         max_page={max_page}
