@@ -3,6 +3,8 @@ import BooksModule from "./Modules/Books/Books_Module";
 import PurchaseModule from "./Modules/Purchase/Purchase_module";
 import StockModule from "./Modules/Stock/Stock_module";
 import Employee_Module from "./Modules/employee/Employee_module";
+import HubModule from "./Modules/Hub/Hub-Module";
+
 
 // Test.jsx
 function SideBar({ module_list, onModuleChange }) {
@@ -32,14 +34,25 @@ function Test() {
   ];
   const [current_module, setCurrentModule] = useState(modules_test[0]);
 
-  const OnModuleChange = (module_index) => {
-    setCurrentModule(modules_test[module_index]);
+  const hub_module = new Module("Hub", "fa fa-home", HubModule);
+
+  const OnModuleChange = (module_index, is_menu) => {
+    if(is_menu) setCurrentModule(hub_module);
+    else setCurrentModule(modules_test[module_index]);
   };
+
   return (
     <div className="root-container">
       <div className="main-container">
         <div className="side-bar">
-          <div className="side-bar-header">Labrary</div>
+          <div className="side-bar-header">
+	    <div 
+  	        onClick={() => OnModuleChange(0, true)}
+	  	className="tittle"
+	  	>
+	  	Labrary ERP
+	    </div>
+	  </div>
           <SideBar module_list={modules_test} onModuleChange={OnModuleChange} />
         </div>
         <div className="main-frame">

@@ -7,3 +7,28 @@
     margin: auto;
     margin-top: 0.5%;
 }
+
+.Employee-module-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+	height: 70%;
+	margin: auto;
+	color: white;
+}
+
+
+.personal-info-container{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    margin: auto;
+    margin-top: 0.5%;
+		display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;	
+		gap: 10%;
+}

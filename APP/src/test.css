@@ -70,8 +70,11 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 36px;
-    color: white;
-
 }
 
+.tittle{
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  
+}
