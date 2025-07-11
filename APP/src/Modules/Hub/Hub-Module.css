@@ -74,12 +74,25 @@ body {
   position: relative;
 }
 
+.news-board{
+  height: 100%;
+  width: 100%;
+  
+}
+
+
 .arrow {
   position: absolute;
   bottom: 10px;
   font-size: 24px;
   font-weight: bold;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border-radius: 10%;
+  padding: 5px 10px;
 }
+
 
 .left-arrow {
   left: 10px;
@@ -87,7 +100,7 @@ body {
 
 .right-arrow {
   right: 10px;
-}
+ }
 
 .birthday-item{
   background-color : #e4e9f0;

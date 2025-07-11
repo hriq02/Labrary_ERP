@@ -26,9 +26,19 @@ function HubModule() {
   ];
 
   const news_boards = [
-    
+   "https://picsum.photos/200/300",
+    "https://picsum.photos/200/400",
+    "https://picsum.photos/200/500"
   ];
-  const current_board = 0;
+  const [current_board, setCurrentBoard] = useState(0);
+
+  const nextBoard = () => {
+    setCurrentBoard((current_board + 1) % news_boards.length);    
+  }
+
+  const prevBoard = () => {
+    setCurrentBoard((current_board - 1 + news_boards.length) % news_boards.length);
+  }
 
 
   return (
@@ -54,9 +64,9 @@ function HubModule() {
       <div className="right-panel">
         <div className="news-title">Labrary news</div>
         <div className="news-box">
-          <img src={news_boards[current_board]} alt="News Board" />
-          <div className="arrow left-arrow">←</div>
-          <div className="arrow right-arrow">→</div>
+          <img className="news-board" src={news_boards[current_board]} alt="News Board" />
+          <div className="fa-solid fa-arrow-left arrow left-arrow" onClick={prevBoard}></div>
+          <div className="fa-solid fa-arrow-right arrow right-arrow" onClick={nextBoard}></div>
         </div>
       </div>
     </div>
