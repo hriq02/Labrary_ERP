@@ -1,0 +1,117 @@
+.search-container{
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 30%;
+
+  gap: 20px;
+  margin-right: 2.5%;
+  margin-top: 1.5%;
+}
+
+.search-bar{
+  width: 50%;
+  height: 50%;
+  border-radius: 10px;
+  border-color: rgb(213, 214, 218);
+  border-style: solid;
+  border-width: 1px;
+}
+
+/*----------------------------------------*/
+
+.button-gen {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  width: 10%;
+  height: 50%;
+  border-radius: 10px;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 2.5%;
+  /* margin: auto; */
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button-gen:hover{
+  background-color: rgb(221, 220, 220);
+}
+
+/*----------------------------------------*/
+
+
+.pag-nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  height: 10%;
+  margin-top: -8px;
+  width: 100%;
+  color: white;
+}
+  
+.pag-nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgb(213, 214, 218);
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pag-nav-button:hover {
+  background-color: rgb(75, 75, 90);
+  color: white;
+}
+
+.pag-nav-current {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.pag-nav-search-button {
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  color: white;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pag-nav-search {
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  cursor:text;
+  width: 1.5%;
+  height: 18%;
+}
+  
+  

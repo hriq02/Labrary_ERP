@@ -18,6 +18,7 @@ function AddBookModal({ onClose }) {
             <div className="modal-window">
                 <div className="modal-header">
                     <div></div>
+                    <div>Add Book</div>
                     <button onClick={onClose} className="modal-close-button">×</button>
                 </div>
                 <div className="modal-body">
@@ -30,22 +31,25 @@ function AddBookModal({ onClose }) {
 }
 
 export function EditBookModal({ onClose, BookData }){
+
+    if (BookData == null || BookData.length != 7) return <div></div>;
+
     const [bookData, setBookData] = useState({
-        id: BookData?.id || "",
-        name: BookData?.name || "",
-        author: BookData?.author || "",
-        publisher: BookData?.publisher || "",
-        price: BookData?.price || "",
-        category: BookData?.category || "",
-        quantity: BookData?.quantity || ""
-    });
-    if (!BookData) return <div></div>;
+        id: BookData[0],
+        name: BookData[1],
+        author: BookData[2],
+        publisher: BookData[3],
+        price: BookData[4],
+        category: BookData[5],
+        quantity: BookData[6]
+    });    
 
     return (
         <div className="modal-overlay">
             <div className="modal-window">
                 <div className="modal-header">
                     <div></div>
+                    <div>Edit Book</div>
                     <button onClick={onClose} className="modal-close-button">×</button>
                 </div>
                 <div className="modal-body">
@@ -58,23 +62,24 @@ export function EditBookModal({ onClose, BookData }){
 }
 
 export function ArchiveBookModal({ onClose, BookData }){
-    const [bookData, setBookData] = useState({
-        id: BookData?.id || "",
-        name: BookData?.name || "",
-        author: BookData?.author || "",
-        publisher: BookData?.publisher || "",
-        price: BookData?.price || "",
-        category: BookData?.category || "",
-        quantity: BookData?.quantity || ""
-    });
     
-    if (!BookData) return <div></div>;
+    if (BookData == null || BookData.length != 7) return <div></div>;
+    const [bookData, setBookData] = useState({
+        id: BookData[0],
+        name: BookData[1],
+        author: BookData[2],
+        publisher: BookData[3],
+        price: BookData[4],
+        category: BookData[5],
+        quantity: BookData[6]
+    });
 
     return (
         <div className="modal-overlay">
             <div className="modal-window">
                 <div className="modal-header">
                     <div></div>
+                    <div>Archive</div>
                     <button onClick={onClose} className="modal-close-button">×</button>
                 </div>
                 <div className="modal-body">
@@ -156,6 +161,21 @@ function FieldInfo({name, data, onChange, readOnly = false}){
             />
         </div>
     )
+}
+
+function BookDataToObj(BookData){
+    if(!BookData) return null;
+    if(BookData.lenght != 7) return null;
+
+    return {
+        id: BookData[0],
+        name: BookData[1],
+        author: BookData[2],
+        publisher: BookData[3],
+        price: BookData[4],
+        category: BookData[5],
+        quantity: BookData[6]
+    }
 }
 
 function ActionButtons({onCancel}){

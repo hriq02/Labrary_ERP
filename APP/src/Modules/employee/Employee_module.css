@@ -1,0 +1,134 @@
+/* AttendancePage.css - Dark Theme */
+
+.page-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: rgb(53, 56, 70);
+  color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.profile-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #444;
+  padding-bottom: 20px;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  object-fit: cover;
+  border: 2px solid #555;
+}
+
+.profile-info {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.profile-info p,
+.profile-info a {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.edit-button {
+  margin-left: auto;
+}
+
+.edit-button button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.tabs {
+  margin-top: 20px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: 1px solid #444;
+  border-bottom: none;
+  background-color: rgb(34, 36, 43);
+  color: #ccc;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.tab.active {
+  background-color: rgb(44, 46, 54);
+  font-weight: bold;
+  color: #fff;
+}
+
+.summary-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.print-button {
+  margin-left: 10px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.summary-section {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border: 1px solid #444;
+  margin-top: 10px;
+}
+
+.summary-columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-columns p {
+  margin: 6px 0;
+}
+
+.summary-columns span {
+  font-weight: bold;
+  color: #ddd;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #2a2a2a;
+}
+
+.attendance-table th,
+.attendance-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: center;
+  color: #ddd;
+}
+
+.attendance-table th {
+  background-color: #333;
+  color: #f0f0f0;
+}

@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard {
+  display: flex;
+  height: 100%;
+  color: white;
+}
+
+.left-panel {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #2b2d30;
+  border-radius: 10px 0 0 10px;
+}
+
+.date-time {
+  text-align: center;
+  height: 30%;
+  margin-top: 5%;
+}
+
+.date {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.time {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.birthdays {
+  text-align: center;
+  height: 70%;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.birthday-box {
+  border: 2px solid black;
+  height: 90%;
+  width: 80%;
+  margin: 0 auto;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.right-panel {
+  width: 70%;
+  padding: 20px;
+}
+
+.news-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.news-box {
+  margin-top: 10%;
+  border: 2px solid black;
+  height: 70%;
+  position: relative;
+}
+
+.news-board{
+  height: 100%;
+  width: 100%;
+  
+}
+
+
+.arrow {
+  position: absolute;
+  bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border-radius: 10%;
+  padding: 5px 10px;
+}
+
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+ }
+
+.birthday-item{
+  background-color : #e4e9f0;
+
+}
+
+.birthday-item2{
+  
+}
