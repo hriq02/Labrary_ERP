@@ -9,8 +9,8 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - /home/hriq/repos/Labrary_ERP/DB/data/  # Mounts the 'db_data' volume to persist data
-      - /home/hriq/repos/Labrary_ERP/DB/scripts/
+      - /home/hriq/repos/Labrary_ERP/DB/data:/var/lib/postgresql/data  # Mounts the 'db_data' volume to persist data
+      - /home/hriq/repos/Labrary_ERP/DB/scripts:/scripts/
 
 
 volumes:

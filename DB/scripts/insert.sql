@@ -1,0 +1,22 @@
+INSERT INTO books (id, name, author, price, genres, cover, publisher)
+VALUES 
+('b5nbkzz3', 'To Kill a Mockingbird'                , 'Harper Lee'              , 12.5  , '[classic,fiction]',              '150/200',  'J.B. Lippincott & Co.'), 
+('qrr11x0l', 'Moby Dick'                            , 'Herman Melville'         , 15.2  , '[whale,sea]',                    '150/210',  'Harper & Brothers'),
+('ngy254vm', '1984'                                 , 'George Orwell'           , 9.99  , '[dystopian,science fiction]',    '160/200',  'Secker & Warburg'),
+('6ap2zate', 'Pride and Prejudice'                  , 'Jane Austen'             , 15.99 , '[classic,romance]',              '150/200',  'T. Egerton'),
+('t9w1ch41', 'The Great Gatsby'                     , 'F. Scott Fitzgerald'     , 12    , '[classic,fiction]',              '150/210',  'Charles Scribner’s Sons'),
+('4k7c3ycs', 'The Catcher in the Rye'               , 'J.D. Salinger'           , 9.99  , '[classic,coming of age]',        '150/220',  'Little, Brown and Company'),
+('6m9euceu', 'The Hitchhikers Guide to the Galaxy'  , 'Douglas Adams'           , 12    , '[science fiction,comedy]',       '150/230',  'Pan Books'),
+('zf2775tv', 'The Lord of the Rings'                , 'J.R.R. Tolkien'          , 20    , '[fantasy,adventure]',            '150/240',  'George Allen & Unwin'),
+('zf27757f', 'The Little Prince'                    , 'Antoine de Saint-Exupéry', 9.99  , '[classic,children]',             '150/250',  'Reynal & Hitchcock'),
+('brejz5d7', 'The Handmaids Tale'                   , 'Margaret Atwood'         , 15    , '[dystopian,feminist]',           '150/260',  'McClelland & Stewart'),
+('9pch1f6p', 'The Picture of Dorian Gray'           , 'Oscar Wilde'             , 12    , '[classic,horror]',               '150/270',  'Ward, Lock & Co.'),
+('qptvsnrf', 'War and Peace'                        , 'Leo Tolstoy'             , 25    , '[classic,war]',                  '150/280',  'The Russian Messenger'),
+('q6typw5u', 'The Count of Monte Cristo'            , 'Alexandre Dumas'         , 18    , '[classic,adventure]',            '150/290',  'Penguin Classics'),
+('m2puby8q', 'The Adventures of Huckleberry Finn'   , 'Mark Twain'              , 12    , '[classic,adventure]',            '150/300',  'Chatto & Windus'),
+('9pchgfs9', 'The Scarlet Letter'                   , 'Nathaniel Hawthorne'     , 9.99  , '[classic,romance]',              '150/310',  'Ticknor, Reed & Fields'),
+('gwjoay44', 'The Bell Jar'                         , 'Sylvia Plath'            , 12    , '[classic,autobiographical]',     '150/320',  'Heinemann'),
+('gwjongao', 'The Stranger'                         , 'Albert Camus'            , 9.99  , '[classic,philosophical]',        '150/330',  'Gallimard'),
+('3j6bmrmn', 'The Grapes of Wrath'                  , 'John Steinbeck'          , 15    , '[classic,realistic fiction]',    '150/340',  'The Viking Press'),
+('o4rwvuqg', 'The Sun Also Rises'                   , 'Ernest Hemingway'        , 12    , '[classic,modernist]',            '150/350',  'Scribner'),
+('l1otsr0p', 'The Sound and the Fury'               , 'William Faulkner'        , 15    , '[classic,modernist]',            '150/360',  'Jonathan Cape');
