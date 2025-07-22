@@ -1,0 +1,3 @@
+#!/bin/sh
+
+psql -d database -U admin -f ${1}.sql || echo "Error running ${1}.sql"

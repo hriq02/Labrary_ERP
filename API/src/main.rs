@@ -1,47 +1,89 @@
+use errors::ServerError;
+use log::{LogLevel, Logger, LoggerMiddleware};
 use sqlx::PgPool;
 use tide::{
     StatusCode,
     http::headers::HeaderValue,
     security::{CorsMiddleware, Origin},
 };
+use std::sync::{Arc, Mutex};
 
 mod endpoints;
 mod entities;
+// mod sql_service_rr;
 mod sql_service;
+mod log;
+mod errors;
+
+#[derive(Clone)]
+pub struct AppState {
+    pub pool: PgPool,
+    pub logger: Arc<Mutex<Logger>>,
+}
 
 #[tokio::main]
+async fn main() {
+    let logger = Arc::new(Mutex::new(Logger::new()));
+    let logger_ctrlc = logger.clone();
 
-async fn main() -> tide::Result<()> {
+    let ctrl_c_task = tokio::spawn(async move {
+        tokio::signal::ctrl_c().await.expect("failed to listen for ctrl_c");
+        println!("Ctrl+C recebido! Salvando logs...");
+
+        if let Ok(mut logger) = logger_ctrlc.lock() {
+            if let Err(e) = logger.write_log() {
+                logger.add_log_error(&e);
+                logger.print_logs();
+            }
+        }
+
+        // Finaliza o processo
+        std::process::exit(0);
+    });
+
+
+    if let Err(e) = run(logger.clone()).await {
+        logger.lock().unwrap().add_log(&e.to_string(), LogLevel::Error);
+        if let Err(e) = logger.lock().unwrap().write_log() {
+            logger.lock().unwrap().add_log_error(&e);
+            logger.lock().unwrap().print_logs();
+        }
+    }
+
+    let _ = ctrl_c_task.await;
+}
+
+
+
+async fn run(logger: Arc<Mutex<Logger>>) -> Result<(), ServerError> {
     let database_url = "postgresql://admin:123456@localhost:5433/database?sslmode=disable";
-    let ip = "http://localhost:5010";
+    let ip = "127.0.0.1:5010";
+    
+    logger.lock()?.add_log(&("Server started at ".to_string() + ip), LogLevel::Info);
 
-    let cors = CorsMiddleware::new()
-        .allow_methods("GET, POST, OPTIONS".parse::<HeaderValue>().unwrap())
-        .allow_origin(Origin::from("*"))
-        .allow_credentials(false);
+    let pool = PgPool::connect(&database_url).await.map_err(|e| {
+        logger.lock().unwrap().add_log(&format!("Failed DB connection: {}", e),LogLevel::Error);
+        tide::Error::from_str(StatusCode::InternalServerError, "Database failed")
+    })?;
 
-    let pool = match PgPool::connect(&database_url).await {
-        Ok(pool) => {
-            println!("Connected to database successfully!");
-            pool
-        }
-        Err(e) => {
-            eprintln!("Failed to connect to database: {:?}", e);
-            return Err(tide::Error::from_str(
-                StatusCode::InternalServerError,
-                "Database connection failed",
-            ));
-        }
+    sql_service::tables::setupd_db(&pool).await?;
+
+    let state = AppState {
+        pool,
+        logger: logger.clone(),
     };
 
-    let mut app = tide::with_state(pool);
-    app.with(cors);
-    //endpoints
+    let mut app = tide::with_state(state);
+    app.with(LoggerMiddleware);
+    app.with(CorsMiddleware::new()
+        .allow_methods("GET, POST, OPTIONS".parse::<HeaderValue>().unwrap())
+        .allow_origin(Origin::from("*"))
+        .allow_credentials(false));
 
-    app.at("/api/BookInfo").get(endpoints::get_books);
+    app.at("/api/books").get(endpoints::get_books);
+    app.at("/api/orders").get(endpoints::get_orders);
 
     println!("Server running on {}", ip);
     app.listen(ip).await?;
-
     Ok(())
 }
