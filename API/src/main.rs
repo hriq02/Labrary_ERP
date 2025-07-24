@@ -78,7 +78,8 @@ async fn run(logger: Arc<Mutex<Logger>>) -> Result<(), ServerError> {
     app.with(CorsMiddleware::new()
         .allow_methods("GET, POST, OPTIONS".parse::<HeaderValue>().unwrap())
         .allow_origin(Origin::from("*"))
-        .allow_credentials(false));
+        .allow_credentials(false)
+    );
 
     app.at("/api/books").get(endpoints::get_books);
     app.at("/api/orders").get(endpoints::get_orders);
