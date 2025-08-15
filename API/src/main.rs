@@ -54,7 +54,6 @@ async fn main() {
 }
 
 
-
 async fn run(logger: Arc<Mutex<Logger>>) -> Result<(), ServerError> {
     let database_url = "postgresql://admin:123456@localhost:5433/database?sslmode=disable";
     let ip = "127.0.0.1:5010";
@@ -83,6 +82,9 @@ async fn run(logger: Arc<Mutex<Logger>>) -> Result<(), ServerError> {
 
     app.at("/api/books").get(endpoints::get_books);
     app.at("/api/orders").get(endpoints::get_orders);
+    app.at("/api/stocks").get(endpoints::get_stocks);
+    app.at("/api/employee/data").get(endpoints::get_employee);
+    app.at("/api/emplyee/birthdates").get(endpoints::get_birth_dates);
 
     println!("Server running on {}", ip);
     app.listen(ip).await?;

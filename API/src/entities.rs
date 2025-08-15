@@ -38,22 +38,15 @@ pub struct Stock {
 
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
-pub struct Employee{
+pub struct EmployeeData{
     pub id : String,
     pub name : String,
-    pub password : String,
     pub role : String,
     pub email : String,
     pub phone : String,
     pub address : String,
-    pub total_work_time : i32,
-    pub total_work_days : i32,
-    pub total_leave : i32,
-    pub total_absence : i32,
-    pub total_overtime : i32,
-    pub total_holyday : i32,
-    pub total_early_leave : i32,
+    pub total_work_hours : i32,
+    pub holiday_left : i32,
     pub salary : i32,
     pub birth_date : String,
-    pub status : i32
 }

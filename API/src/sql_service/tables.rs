@@ -65,14 +65,27 @@ pub async fn setupd_db(pool: &PgPool) -> Result<(),SqlServErr> {
         .column("email              TEXT    UNIQUE  NOT NULL")
         .column("phone              TEXT    UNIQUE  NOT NULL")
         .column("address            TEXT            NOT NULL")
-        .column("total_work_time    SMALLINT        NOT NULL")
-        .column("total_work_days    SMALLINT        NOT NULL")
-        .column("total_leave        SMALLINT        NOT NULL")
-        .column("total_absence      SMALLINT        NOT NULL")
-        .column("total_overtime     SMALLINT        NOT NULL")
-        .column("total_early_leave  SMALLINT        NOT NULL")
         .column("salary             SMALLINT        NOT NULL")
         .column("birth_date         DATE            NOT NULL")
+        .as_string()
+        .as_str()
+    ).await;
+
+    // create_table("time_stamps", pool, 
+    //     sql::CreateTable::new()
+    //     .create_table_if_not_exists("time_stamps")
+    //     .column("")
+    //     .as_string()
+    //     .as_str()
+    // ).await;
+
+    create_table("hour_bank", pool, 
+        sql::CreateTable::new()
+        .create_table_if_not_exists("hour_bank")
+        .column("employee_id    CHAR(10)    PRIMARY KEY")
+        .column("total_hours    INT         NOT NULL")
+        .column("holiday_left   SMALLINT    NOT NULL")
+        
         .as_string()
         .as_str()
     ).await;
