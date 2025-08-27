@@ -78,3 +78,10 @@ impl<T> From<PoisonError<T>> for ServerError {
         ServerError::MutexError(err.to_string())
     }
 }
+
+
+impl From<std::fmt::Error> for ServerError {
+    fn from(err: std::fmt::Error) -> Self {
+        ServerError::LogWritingError(err.to_string())
+    }
+}
