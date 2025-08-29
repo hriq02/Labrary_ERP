@@ -45,3 +45,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Zig build artifacts and cache
+zig-out/
+zig-cache/
+.zig-cache/
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+
+# Operating system generated files
+.DS_Store
+Thumbs.db

@@ -9,11 +9,12 @@ use tide::{
 use std::sync::{Arc, Mutex};
 
 mod endpoints;
-mod entities;
 // mod sql_service_rr;
 mod sql_service;
 mod log;
 mod errors;
+
+use endpoints::gets;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -23,6 +24,7 @@ pub struct AppState {
 
 #[tokio::main]
 async fn main() {
+    print!("\x1B[2J\x1B[1;1H"); //clear terminal
     let logger = Arc::new(Mutex::new(Logger::new()));
     let logger_ctrlc = logger.clone();
 
@@ -80,11 +82,11 @@ async fn run(logger: Arc<Mutex<Logger>>) -> Result<(), ServerError> {
         .allow_credentials(false)
     );
 
-    app.at("/api/books").get(endpoints::get_books);
-    app.at("/api/orders").get(endpoints::get_orders);
-    app.at("/api/stocks").get(endpoints::get_stocks);
-    app.at("/api/employee/data").get(endpoints::get_employee);
-    app.at("/api/emplyee/birthdates").get(endpoints::get_birth_dates);
+    app.at("/api/books").get(gets::get_books);
+    app.at("/api/orders").get(gets::get_orders);
+    app.at("/api/stocks").get(gets::get_stocks);
+    app.at("/api/employee/data").get(gets::get_employee);
+    app.at("/api/employee/birthdates").get(gets::get_birth_dates);
 
     println!("Server running on {}", ip);
     app.listen(ip).await?;

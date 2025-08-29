@@ -7,6 +7,7 @@ import "./Hub-Module.css"
 function HubModule() {
   const [time, setTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
   const [today, setToday] = useState(new Date().toLocaleDateString());
+  const [birthdays, setBirthdays] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,17 +19,27 @@ function HubModule() {
     return () => clearInterval(interval);
   }, []);
 
-  const birthdays = [
-    { name: 'John Doe', date: '2023-05-15' },
-    { name: 'Jane Smith', date: '2023-05-20' },
-    { name: 'Bob Johnson', date: '2023-05-25' },
-    {name: 'Mark Smith', date: '2023-05-31'},
-  ];
+  useEffect(() => {
+    fetch("http://127.0.0.1:5010/api/employee/birthdates")
+      .then((res) => {
+        if (!res.ok) throw new Error("Error fetching\n" + res.statusText);
+        return res.json();
+      })
+      .then((data) => {
+        // backend retorna [["name","date"], ...]
+        const formatted = data.map((item) => ({ name: item[0], date: item[1] }));
+        setBirthdays(formatted);
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
+        setBirthdays([]);
+      });
+  }, []); // roda só uma vez
 
   const news_boards = [
-   "https://picsum.photos/200/300",
-    "https://picsum.photos/200/400",
-    "https://picsum.photos/200/500"
+   "http://localhost:3000/?path=a.png",
+    "http://localhost:3000/?path=osaka1.png",
+    "http://localhost:3000/?path=osaka3.gif"
   ];
   const [current_board, setCurrentBoard] = useState(0);
 

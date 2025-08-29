@@ -1,0 +1,12 @@
+ports:
+
+ERP     | 5173
+API     | 5010
+DB      | 5432
+FileSv  | 5215
+
+
+
+zig:
+
+zig fetch --save "git+https://github.com/zigzap/zap#v0.11.0"

@@ -2,15 +2,25 @@ import "./Employee_module.css"
 import "../../components/module_pane.css"
 import "./Employee_module.css"
 
+import React,{useState, useEffect} from 'react';
+
 
 function Employee_Module() {
-  const emplyee_data = {
-    name: "Jhon Doe",
-    job_title: "Book Specialist",
-    email: "figureitout@Labrary.com",
-    phone: "11 99213-3212",
-    profile_pic: "https://www.w3schools.com/images/w3schools_green.jpg",
-  }
+	const employee_id = "1"
+	const [employee_data, setEmployeeData] = useState({
+		name : "",
+		role : "",
+		email : "",
+		phone : "",
+		profile_pic : "",
+	});
+
+	useEffect(() => {
+		fetch(`http://127.0.0.1:5010/api/employee/data?id=${employee_id}`)
+			.then(res => res.json())
+			.then(data => setEmployeeData(data))
+			.catch(err => console.error(err));
+	}, []);
   
   const attendance_data = {
     total_work_time: "85h 48m",
@@ -31,15 +41,15 @@ function Employee_Module() {
 		<div className="page-container">
 			<div className="profile-section">
 				<img
-				src={emplyee_data.profile_pic}
+				src={employee_data.profile_pic}
 				alt="Profile"
 				className="profile-pic"
 				/>
 				<div className="profile-info">
-				<h2>{emplyee_data.name}</h2>
-				<p>{emplyee_data.job_title}</p>
-				<a href={emplyee_data.email}>{emplyee_data.email}</a>
-				<p>📱 {emplyee_data.phone}</p>
+				<h2>{employee_data.name}</h2>
+				<p>{employee_data.role}</p>
+				<a href={employee_data.email}>{employee_data.email}</a>
+				<p>📱 {employee_data.phone}</p>
 				</div>
 				<div className="edit-button">
 				<button>Edit</button>
