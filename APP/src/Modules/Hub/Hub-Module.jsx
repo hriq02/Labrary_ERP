@@ -37,9 +37,9 @@ function HubModule() {
   }, []); // roda só uma vez
 
   const news_boards = [
-   "http://localhost:3000/?path=a.png",
-    "http://localhost:3000/?path=osaka1.png",
-    "http://localhost:3000/?path=osaka3.gif"
+   "http://127.0.0.1:5215/a.png",
+    "http://127.0.0.1:5215/osaka1.png",
+    "http://127.0.0.1:5215/osaka3.gif"
   ];
   const [current_board, setCurrentBoard] = useState(0);
 
