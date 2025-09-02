@@ -11,6 +11,7 @@ pub enum OrderStatus {
     Shipped = 1,
     Delivered = 2,
     Cancelled = 3,
+    Blocked = 4,
 }
 
 
@@ -25,7 +26,7 @@ pub async fn setupd_db(pool: &PgPool) -> Result<(),SqlServErr> {
             }
     } 
 
-    create_table("users", pool,
+    create_table("books", pool,
             &sql::CreateTable::new()
         .create_table_if_not_exists("books")
         .column("id         CHAR(10)    PRIMARY KEY")
@@ -36,7 +37,7 @@ pub async fn setupd_db(pool: &PgPool) -> Result<(),SqlServErr> {
         .column("in_stock   SMALLINT    NOT NULL")
         .column("publisher  TEXT        NOT NULL")
         .column("storage_id CHAR(10)    NOT NULL")
-        .column("status     CHAR(10)     NOT NULL")
+        .column("status     CHAR(10)    NOT NULL")
         .as_string()
     ).await;
 
@@ -65,19 +66,22 @@ pub async fn setupd_db(pool: &PgPool) -> Result<(),SqlServErr> {
         .column("email              TEXT    UNIQUE  NOT NULL")
         .column("phone              TEXT    UNIQUE  NOT NULL")
         .column("address            TEXT            NOT NULL")
-        .column("salary             SMALLINT        NOT NULL")
+        .column("salary             INT             NOT NULL")
         .column("birth_date         DATE            NOT NULL")
         .as_string()
         .as_str()
     ).await;
 
-    // create_table("time_stamps", pool, 
-    //     sql::CreateTable::new()
-    //     .create_table_if_not_exists("time_stamps")
-    //     .column("")
-    //     .as_string()
-    //     .as_str()
-    // ).await;
+    create_table("time_stamps", pool, 
+        sql::CreateTable::new()
+        .create_table_if_not_exists("time_stamps")
+        .column("ID             INT         PRIMARY KEY AUTO_INCREMENT")
+        .column("employee_id    CHAR(10)    NOT NULL")
+        .column("date           DATE        NOT NULL")
+        .column("time           TIME        NOT NULL")
+        .as_string()
+        .as_str()
+    ).await;
 
     create_table("hour_bank", pool, 
         sql::CreateTable::new()

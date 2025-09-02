@@ -15,6 +15,7 @@ mod log;
 mod errors;
 
 use endpoints::gets;
+use endpoints::posts;
 
 #[derive(Clone)]
 pub struct AppState {
@@ -38,8 +39,6 @@ async fn main() {
                 logger.print_logs();
             }
         }
-
-        // Finaliza o processo
         std::process::exit(0);
     });
 
@@ -83,9 +82,15 @@ async fn run(logger: Arc<Mutex<Logger>>) -> Result<(), ServerError> {
     );
 
     app.at("/api/books").get(gets::get_books);
+    app.at("api/books").post(posts::post_book);
+
     app.at("/api/orders").get(gets::get_orders);
+    app.at("api/orders").post(posts::post_order);
+
     app.at("/api/stocks").get(gets::get_stocks);
+    
     app.at("/api/employee/data").get(gets::get_employee);
+    app.at("/api/employee/data").post(posts::post_employee_data);
     app.at("/api/employee/birthdates").get(gets::get_birth_dates);
 
     println!("Server running on {}", ip);
