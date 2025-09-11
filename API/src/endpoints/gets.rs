@@ -1,6 +1,7 @@
 use crate::{sql_service::fetches, AppState};
-use serde::Serialize;
-use tide::{Request, Response, StatusCode};
+use tide::Request;
+
+use super::handlers::{handle_error, handle_response};
 
 pub async fn get_books(req: Request<AppState>) -> tide::Result {
     let pool = &req.state().pool;
@@ -56,29 +57,4 @@ pub async fn get_birth_dates(req: Request<AppState>) -> tide::Result {
         Ok(birth_dates) => handle_response(birth_dates),
         Err(e) => handle_error(&req, e)
     }
-}
-
-
-
-fn handle_response<T: Serialize>(t: T) -> tide::Result{
-    Ok(Response::builder(StatusCode::Ok)
-        .body(serde_json::to_string(&t)?)
-        .content_type("application/json")
-        .build()
-    )
-}
-
-fn handle_error(req: &Request<AppState>, e: sqlx::Error) -> tide::Result {
-    let error = e.to_string();
-    match req.state().
-    logger.lock(){
-        Ok(mut logger) => 
-            logger.add_log_error(&e.into()),
-        Err(e) => 
-            println!("Failed to log error: {}", e),
-    }
-    Ok(Response::builder(StatusCode::InternalServerError)
-        .body(format!("Failed to fetch: {:?}", error))
-        .build()
-    )
 }

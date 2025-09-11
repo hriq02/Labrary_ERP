@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import GridComponent from "../../components/GridComponent";
 import SearchComponent,{PagNav,ButtonAction} from "../../components/SmallComponents";
 import EditOrderModal from "./Purchase_modal.jsx";
@@ -7,19 +7,25 @@ import "../../components/module_pane.css"
 function PurchaseModule() {
   
   const grid_max_rows = 12;
-  
+  const [orders, setOrders] = useState([]);
+  const [gridPage, setGridPage] = useState(1); 
+  const max_page = 10;
   const GridHeader = ["id", "BookID", "tracking code", "status"];
-  const CellsData = [
-    ["1", "32", "1234", "pending"],
-    ["2", "32", "1234", "aproved"],
-    ["3", "32", "1234", "pending"],
-    ["4", "32", "1234", "pending"],
-    ["5", "32", "1234", "aproved"],
-    ["6", "32", "1234", "denied"],
-    ["7", "32", "1234", "aproved"],
-    ["9", "32", "1234", "pending"],
-    ["10", "32", "1234", "pending"],
-  ]
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5010/api/orders?page=${gridPage}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error fetching\n" + res.statusText);
+        return res.json();
+      })
+      .then((data) => {
+        setOrders(data);
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
+      });
+  }, [gridPage]);
 
   const [rowNumber, setRowNumber] = useState(1);
 
@@ -30,20 +36,16 @@ function PurchaseModule() {
     console.log("onHeaderSort");
   };
 
-  const [gridPage, setGridPage] = useState(1); 
-  const max_page = 10;
-
   const onPageChange = (page) => {
     if (page >= 1 && page <= max_page) {
       setGridPage(page);
+      setOrders([]);
     }
   };
 
   const onSearch = (content) => {
     console.log(content);
   }
-
-  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
 
   const handleOpenEditModal = () => setIsModalEditOpen(true);
 
@@ -79,7 +81,7 @@ function PurchaseModule() {
       </div>
       <GridComponent
         GridHeader={GridHeader}
-        CellsData={CellsData}
+        CellsData={orders}
         _onRowSelected={onRowSelected}
         onHeaderSort={onHeaderSort}
         max_rows={grid_max_rows}

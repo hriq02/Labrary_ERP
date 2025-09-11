@@ -1,5 +1,5 @@
 import "./Books.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import GridComponent from "../../components/GridComponent";
 import SearchComponent,{PagNav,ButtonAction} from "../../components/SmallComponents";
@@ -17,6 +17,7 @@ function BooksModule() {
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalArchiveOpen, setIsModalArchiveOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [books, setBooks] = useState([]);
 
   const [rowSelected, setRowSelected] = useState(1); // usa state agora
 
@@ -33,6 +34,7 @@ function BooksModule() {
   const onPageChange = (page) => {
     if (page >= 1 && page <= max_page) {
       setGridPage(page);
+      setBooks([]);
     }
   };
 
@@ -44,20 +46,19 @@ function BooksModule() {
     console.log(content);
   }
 
-  const books = [
-    ["1", "Book1", "Author1", "Publisher1", "100", "Category1", "10"],
-    ["2", "Book2", "Author2", "Publisher2", "200", "Category2", "20"],
-    ["3", "Book3", "Author3", "Publisher3", "300", "Category3", "30"],
-    ["4", "Book4", "Author4", "Publisher4", "400", "Category4", "40"],
-    ["5", "Book5", "Author5", "Publisher5", "500", "Category5", "50"],
-    ["6", "Book6", "Author6", "Publisher6", "600", "Category6", "60"],
-    ["7", "Book7", "Author7", "Publisher7", "700", "Category7", "70"],
-    ["8", "Book8", "Author8", "Publisher8", "800", "Category8", "80"],
-    ["9", "Book9", "Author9", "Publisher9", "900", "Category9", "90"],
-    ["10","Book10","Author10","Publisher10","1000","Category10","100,"],
-    ["11","Book11","Author11","Publisher11","1100","Category11","110,"],
-    ["12","Book12","Author12","Publisher12","1200","Category12","120,"],
-  ];
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5010/api/books?page=${gridPage}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error fetching\n" + res.status);
+        return res.json();
+      })
+      .then((data) => {
+        setBooks(data);
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
+      });
+  }, [gridPage]);
 
   const headers = ["id", "name", "author", "publisher", "price", "category", "quantity"];
 
@@ -140,5 +141,6 @@ function BooksModule() {
   );
 }
 
-
 export default BooksModule;
+
+

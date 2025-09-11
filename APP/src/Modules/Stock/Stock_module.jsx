@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GridComponent from "../../components/GridComponent";
 import SearchComponent,{PagNav} from "../../components/SmallComponents";
 import "./Stock_module.css";
@@ -7,22 +7,24 @@ import "../../components/module_pane.css"
 function StockModule() {
   
   const grid_max_rows = 12;
-  
+  const [gridPage, setGridPage] = useState(1);
+  const max_page = 10;
   const GridHeader = ["id", "BookID", "in Stock","number of orders","storage id","status",];
-  const CellsData = [
-    ["23", "32", "320", "100", "ab023", "not archived"],
-    ["35", "125", "114", "34", "db343", "not archived"],
-    ["61", "15",   "5",   "5", "gh942", "archived"],
-    ["13", "78", "12", "10", "ab153", "archived"],
-    ["23", "32", "320", "100", "ab023", "not archived"],
-    ["35", "125", "114", "34", "db343", "not archived"],
-    ["61", "15",   "5",   "5", "gh942", "archived"],
-    ["13", "78", "12", "10", "ab153", "archived"],
-    ["23", "32", "320", "100", "ab023", "not archived"],
-    ["35", "125", "114", "34", "db343", "not archived"],
-    ["61", "15",   "5",   "5", "gh942", "archived"],
-    ["13", "78", "12", "10", "ab153", "archived"],
-  ]
+  const [stocks, setStocks] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5010/api/stocks?page=${gridPage}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error fetching\n" + res.statusText);
+        return res.json();
+      })
+      .then((data) => {
+        setOrders(data);
+      })
+      .catch((err) => {
+        console.error("Erro:", err);
+      });
+  }, [gridPage]);
 
   
   const onRowSelected = (rowNumber) => {
@@ -31,9 +33,6 @@ function StockModule() {
   const onHeaderSort = () => {
     console.log("onHeaderSort");
   };
-
-  const [gridPage, setGridPage] = useState(1);
-  const max_page = 10;
 
   const onPageChange = (page) => {
     if (page >= 1 && page <= max_page) {
@@ -53,7 +52,7 @@ function StockModule() {
       </div>
       <GridComponent
         GridHeader={GridHeader}
-        CellsData={CellsData}
+        CellsData={stocks}
         _onRowSelected={onRowSelected}
         onHeaderSort={onHeaderSort}
         max_rows={grid_max_rows}

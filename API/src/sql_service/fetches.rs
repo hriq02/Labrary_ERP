@@ -1,6 +1,6 @@
 use std::error::Error;
 
-use crate::entities::{Book, EmployeeData, Order, Stock};
+use crate::endpoints::entities::{Book, EmployeeData, Order, Stock};
 use sql_query_builder as sql;
 use sqlx::Row;
 use sqlx::{PgPool, QueryBuilder};
@@ -17,7 +17,7 @@ pub async fn fetch_books(
         sql::Select::new()
         .select("id,name,author,price,genres,in_stock,publisher,storage_id,status")
         .from("books")
-        .raw(if filter != "" {filter} else {"1=1"})
+        .where_clause(if filter != "" {filter} else {"1=1"})
         .offset(format!("(({}-1) * {})", page, limit).as_str())
         .limit(&limit)
         .as_string()
@@ -150,17 +150,18 @@ pub async fn fetch_employee_data(
 pub async fn fetch_birth_dates(
     pool: &PgPool,
     limit : &str
-) -> Result<Vec<String>, sqlx::Error> {
+) -> Result<Vec<Vec<String>>, sqlx::Error> {
     Ok(
         sqlx::query(
             &sql::Select::new()
-                .select("birth_date")
+                .select("birth_date, name")
                 .from("employees")
                 .order_by("birth_date")
                 .limit(&limit)
                 .as_string()
         ).fetch_all(pool).await?
         .iter()
-        .map(|row| row.get("birth_date")).collect()
+        .map(|row| vec![row.get("name"),row.get("birth_date"),])
+        .collect()
     )
 }

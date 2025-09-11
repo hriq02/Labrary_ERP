@@ -9,10 +9,38 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - /home/hriq/repos/Labrary_ERP/DB/data:/var/lib/postgresql/data  # Mounts the 'db_data' volume to persist data
-      - /home/hriq/repos/Labrary_ERP/DB/scripts:/scripts/
+      - ./DB/data:/var/lib/postgresql/data
+      - ./DB/scripts:/scripts/
+  file_server:
+    image: alpine:3.14
+    container_name: file_server
+    ports:
+      - "5215:5215"
+    volumes:
+      - ./FileServer/zig-out/bin:/file_server
+    entrypoint: [/file_server/FileServer]
+  API:
+    image: alpine:3.14
+    container_name: API
+    working_dir: /API
+    ports:
+      - "5010:5010"
+    volumes:
+      - ./API/logs:/API/logs
+      - ./API/target/release:/API
+    entrypoint: ["/API/API"]
+
+  APP:
+    image: node:20-alpine
+    container_name: APP
+    working_dir: /APP
+    ports: 
+      - "5173:5173"
+    volumes:
+      - ./APP:/APP
+    entrypoint: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 
 volumes:
   db_data:
-    driver: local  # Uses the local driver for the volume
+    driver: local
